@@ -216,9 +216,6 @@ void dataEntryProcedure() {
 				cin>>user;
 				cout<<"Contrasenia de usuario: ";
 				cin>>password;
-				cout<<"VC "<<virtualCodeAccount;
-				cout<<"CP "<<codePerson;
-				cout<<"FC "<<financialCode;
 				system("Pause");
 				createRecordInVirtualAccounts<<virtualCodeAccount<<" "<<codePerson<<" "<<financialCode<<" "<<user<<" "<<password<<endl;
 				createRecordInVirtualAccounts.close();
@@ -235,8 +232,592 @@ void dataEntryProcedure() {
 	} while (optionMenu != 4);
 }
 
+void dataDisplayProcedureFromPersonalData(){
+	int findInt, TMPInt = 0;
+	string findString, TMPString = "";
+	do{
+		ifstream searchData("Informacion-Personal.txt");
+		system("cls");
+		cout<<"------ Mostrar informacion -------"<<endl;
+        cout<<"----------------------------------"<<endl;
+		cout<<"1. Todos los datos"<<endl;
+		cout<<"2. Codigo"<<endl;
+		cout<<"3. Nombre"<<endl;
+		cout<<"4. Apellido"<<endl;
+		cout<<"5. Direccion"<<endl;
+		cout<<"6. Correo electronico"<<endl;
+		cout<<"7. Telefono"<<endl;
+		cout<<"8. Regresar"<<endl;
+        cout<<"--------------------------------"<<endl;
+		cin>>optionMenu;
+		switch (optionMenu) {
+			case 1:{
+				system("cls");
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 2:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (codePerson ==  findInt && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 3:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Nombre: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (username ==  findString && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 4:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Apellido: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (userLastname ==  findString && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 5:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Direccion: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (userAddress ==  findString && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 6:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"email: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (userEmail ==  findString && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 7:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Telefono: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+					if (userPhone ==  findInt && codePerson != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo: "<<codePerson<<endl;
+						cout<<"Nombre: "<<username<<endl;
+						cout<<"Apellido: "<<userLastname<<endl;
+						cout<<"Direccion: "<<userAddress<<endl;
+						cout<<"Correo electronico: "<<userEmail<<endl;
+						cout<<"Telefono: "<<userPhone<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = codePerson;
+				}
+				system("pause");
+			}
+			break;
+			case 8:
+				cout<<endl<<"Volviendo... ";
+				break;
+			default:
+				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;
+				system("pause");
+				break;
+		}
+		searchData.close();
+	} while (optionMenu != 8);
+}
+
+void dataDisplayProcedureFromFinancialData(){
+	int findInt, TMPInt = 0;
+	string findString, TMPString = "";
+	do{
+		ifstream searchData("Informacion-Financiera.txt");
+		system("cls");
+		cout<<"------ Mostrar informacion -------"<<endl;
+        cout<<"----------------------------------"<<endl;
+		cout<<"1. Todos los datos"<<endl;
+		cout<<"2. Codigo financiero"<<endl;
+		cout<<"3. Codigo Persona"<<endl;
+		cout<<"4. Nombre banco"<<endl;
+		cout<<"5. Numero de cuenta"<<endl;
+		cout<<"6. Tipo de cuenta"<<endl;
+		cout<<"7. Tarjeta"<<endl;
+		cout<<"8. Tipo de tarjeta"<<endl;
+		cout<<"9. Regresar"<<endl;
+        cout<<"--------------------------------"<<endl;
+		cin>>optionMenu;
+		switch (optionMenu) {
+			case 1:{
+				system("cls");
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 2:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo financiero: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (financialCode == findInt && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 3:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo Persona: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (codePerson == findInt && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 4:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Nombre banco: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (bankName == findString && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 5:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Numero de cuenta: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (accountNumber == findString && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 6:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				do {
+					cout<<"Ingrese el numero correspondiente al tipo de cuenta: \n\t 1. Ahorro\n\t 2. Monetaria"<<endl;
+					cin>>accountType;
+					if (accountType >= 3 || accountType <= 0) {
+						cout<<"No es un tipo valido de cuenta, ingrese otro. ";
+					}
+				} while (accountType >= 3 || accountType <= 0);
+				findString = accountTypeIntToString(accountType);
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (accountTypeStr == findString && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 7:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Tarjeta: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (cardNumber == findString && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 8:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				do {
+					cout<<"Ingrese el numero correspondiente al tipo de tarjeta: \n\t 1. Debito\n\t 2. Credito"<<endl;
+					cin>>cardType;
+					if (cardType >= 3 || cardType <= 0) {
+						cout<<"No es un tipo valido de tarjeta, ingrese otro. ";
+					}
+				} while (cardType >= 3 || cardType <= 0);
+				findString = cardTypeIntToString(cardType);
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+					if (cardTypeStr == findString && financialCode != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Nombre banco: "<<bankName<<endl;
+						cout<<"Numero de cuenta: "<<accountNumber<<endl;
+						cout<<"Tipo de cuenta: "<<accountTypeStr<<endl;
+						cout<<"Tarjeta: "<<cardNumber<<endl;
+						cout<<"Tipo de tarjeta: "<<cardTypeStr<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = financialCode;
+				}
+				system("pause");
+			}
+			break;
+			case 9:
+				cout<<endl<<"Volviendo... ";
+				break;
+			default:
+				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;
+				system("pause");
+				break;
+		}
+		searchData.close();
+	} while (optionMenu != 9);
+}
+
+void dataDisplayProcedureFromVirtualAccounts(){
+	int findInt, TMPInt = 0;
+	string findString, TMPString = "";
+	do{
+		ifstream searchData("Cuentas-Virtuales.txt");
+		system("cls");
+		cout<<"------ Mostrar informacion -------"<<endl;
+        cout<<"----------------------------------"<<endl;
+		cout<<"1. Todos los datos"<<endl;
+		cout<<"2. Codigo cuenta virtual"<<endl;
+		cout<<"3. Codigo Persona"<<endl;
+		cout<<"4. Codigo financiero"<<endl;
+		cout<<"5. Usuario"<<endl;
+		cout<<"6. Regresar"<<endl;
+        cout<<"--------------------------------"<<endl;
+		cin>>optionMenu;
+		switch (optionMenu) {
+			case 1:{
+				system("cls");
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+					if (virtualCodeAccount != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo cuenta virtual: "<<virtualCodeAccount<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Usuario: "<<user<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = virtualCodeAccount;
+				}
+				system("pause");
+			}
+			break;
+			case 2:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo cuenta virtual: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+					if (virtualCodeAccount == findInt && virtualCodeAccount != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo cuenta virtual: "<<virtualCodeAccount<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Usuario: "<<user<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = virtualCodeAccount;
+				}
+				system("pause");
+			}
+			break;
+			case 3:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo Persona: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+					if (codePerson == findInt && virtualCodeAccount != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo cuenta virtual: "<<virtualCodeAccount<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Usuario: "<<user<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = virtualCodeAccount;
+				}
+				system("pause");
+			}
+			break;
+			case 4:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Codigo financiero: ";
+				cin>>findInt;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+					if (financialCode == findInt && virtualCodeAccount != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo cuenta virtual: "<<virtualCodeAccount<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Usuario: "<<user<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = virtualCodeAccount;
+				}
+				system("pause");
+			}
+			break;
+			case 5:{
+				system("cls");
+				cout<<"Ingrese el criterio de busqueda"<<endl;
+				cout<<"Usuario: ";
+				cin>>findString;
+				cout<<"Coincidencias de busqueda: "<<endl;
+				while (searchData != NULL) {
+					searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+					if (user == findString && virtualCodeAccount != TMPInt) {
+						cout<<"---------------------------------------"<<endl;
+						cout<<"Codigo cuenta virtual: "<<virtualCodeAccount<<endl;
+						cout<<"Codigo Persona: "<<codePerson<<endl;
+						cout<<"Codigo financiero: "<<financialCode<<endl;
+						cout<<"Usuario: "<<user<<endl;
+						cout<<"---------------------------------------"<<endl;
+					}
+					TMPInt = virtualCodeAccount;
+				}
+				system("pause");
+			}
+			break;
+			case 6:
+				cout<<endl<<"Volviendo... ";
+				break;
+			default:
+				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;
+				system("pause");
+				break;
+		}
+		searchData.close();
+	} while (optionMenu != 6);
+}
+
 void dataDisplayProcedure(){
-	
+	do{
+		system("cls");
+		cout<<"------ Mostrar informacion -------"<<endl;
+        cout<<"----------------------------------"<<endl;
+		cout<<"1. Datos personales"<<endl;
+		cout<<"2. Datos financieros"<<endl;
+		cout<<"3. Datos de cuentas virtuales"<<endl;
+		cout<<"4. Salir"<<endl;
+        cout<<"--------------------------------"<<endl;
+		cin>>optionMenu;
+		switch (optionMenu) {
+			case 1:{
+				dataDisplayProcedureFromPersonalData();
+			}
+			break;
+			case 2:{
+				dataDisplayProcedureFromFinancialData();
+			}
+			break;
+			case 3:{
+				dataDisplayProcedureFromVirtualAccounts();
+			}
+			break;
+			case 4:
+				cout<<endl<<"Volviendo... ";
+				break;
+			default:
+				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;
+				system("pause");
+				break;
+		}
+	} while (optionMenu != 4);
 }
 
 main() {
