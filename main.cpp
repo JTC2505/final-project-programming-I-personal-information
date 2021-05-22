@@ -3,8 +3,8 @@
 #include<string>
 
 using namespace std;
-int codePerson, financialCode, option, userPhone, accountType, cardType, searchCodePerson = 1, optionMenu;
-string username, userLastname, userAddress, userEmail, passwordEmail, user, password, bankName, accountNumber = "a", accountTypeStr, cardNumber, cardTypeStr;
+int codePerson, financialCode, virtualCodeAccount, option, userPhone, accountType, cardType, optionMenu, financialCodeTempForFile, codePersonTempForFile;
+string accountNumberTempForFile, username, userLastname, userAddress, userEmail, passwordEmail, user, password, bankName, accountNumber = "a", accountTypeStr, cardNumber, cardTypeStr;
 bool exist = false;
 
 bool is_empty(ifstream& pFile) 
@@ -61,7 +61,7 @@ bool verifyExistInFinancial(int code){
 		returnValue = false;
 	}else{	
 		while (searchInFile != NULL) {
-			searchInFile>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+			searchInFile>>financialCode>>codePersonTempForFile>>bankName>>accountNumberTempForFile>>accountTypeStr>>cardNumber>>cardTypeStr;
 			if (financialCode == code) {
 				returnValue = true;
 			}else if(returnValue != true){
@@ -74,34 +74,14 @@ bool verifyExistInFinancial(int code){
 	return returnValue;
 }
 
-bool verifyExistAccount(string account){
-	bool returnValue;
-	ifstream searchInFile("Informacion-Financiera.txt");	
-	if(is_empty(searchInFile)){
-		returnValue = false;
-	}else{
-		while (searchInFile != NULL) {
-			searchInFile>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
-			if (accountNumber == account) {
-				returnValue = true;
-			}else if(returnValue != true){
-				returnValue = false;
-			}
-		}
-	}
-	accountNumber = account;
-	searchInFile.close();
-	return returnValue;
-}
-
 bool verifyExistInVirtualAcounts(int code){
 	bool returnValue;
-	ifstream searchInFile("Cuentas-Virtuales.txt");	
+	ifstream searchInFile("Cuentas-Virtuales.txt");
 	if(is_empty(searchInFile)){
 		returnValue = false;
-	}else{
+	}else{	
 		while (searchInFile != NULL) {
-			searchInFile>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+			searchInFile>>virtualCodeAccount>>codePersonTempForFile>>financialCodeTempForFile>>user>>password;
 			if (codePerson == code) {
 				returnValue = true;
 			}else if(returnValue != true){
@@ -109,7 +89,26 @@ bool verifyExistInVirtualAcounts(int code){
 			}
 		}
 	}
-	codePerson = code;
+	virtualCodeAccount = code;
+	searchInFile.close();
+	return returnValue;
+}
+
+bool verifyExistAccount(string account){
+	bool returnValue;
+	ifstream searchInFile("Informacion-Financiera.txt");	
+	if(is_empty(searchInFile)){
+		returnValue = false;
+	}else{
+		while (searchInFile != NULL) {
+			searchInFile>>financialCode>>codePerson>>bankName>>accountNumberTempForFile>>accountTypeStr>>cardNumber>>cardTypeStr;
+			if (accountNumberTempForFile == account) {
+				returnValue = true;
+			}else if(returnValue != true){
+				returnValue = false;
+			}
+		}
+	}
 	searchInFile.close();
 	return returnValue;
 }
@@ -147,6 +146,7 @@ void dataEntryProcedure() {
 				cin>>passwordEmail;
 				cout<<"Telefono/Celular: ";
 				cin>>userPhone;
+				system("Pause");
 				createRecordInPersonalInformation<<codePerson<<" "<<username<<" "<<userLastname<<" "<<userAddress<<" "<<userEmail<<" "<<passwordEmail<<" "<<userPhone<<" "<<endl;
 				createRecordInPersonalInformation.close();
 			}
@@ -155,6 +155,11 @@ void dataEntryProcedure() {
 				system("cls");
 				ofstream createRecordInFinancialData("Informacion-Financiera.txt", ios::app);
 				cout<<endl<<"----------------- Ingreso de informacion financiera -----------------"<<endl;
+				do{
+					cout<<"Numero de cuenta: ";
+					cin>>accountNumber;
+					exist = verifyExistAccount(accountNumber);
+				} while (exist);
 				do{
 					cout<<"Codigo financiero: ";
 					cin>>financialCode;
@@ -167,11 +172,6 @@ void dataEntryProcedure() {
 				} while (exist == false);
 				cout<<"Nombre banco: ";
 				cin>>bankName;
-				//do{
-				//	cout<<"Numero de cuenta: ";
-				//	cin>>accountNumber;
-				//	exist = verifyExistAccount(accountNumber);
-				//} while (exist);
 				do {
 					cout<<"Ingrese el numero correspondiente al tipo de cuenta: \n\t 1. Ahorro\n\t 2. Monetaria"<<endl;
 					cin>>accountType;
@@ -188,9 +188,6 @@ void dataEntryProcedure() {
 						cout<<"No es un tipo valido de tarjeta, ingrese otro. ";
 					}
 				} while (cardType >= 3 || cardType <= 0);
-				cout<<financialCode;
-				cout<<codePerson;
-				cout<<bankName;
 				system("Pause");
 				createRecordInFinancialData<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<accountNumber<<" "<<accountTypeIntToString(accountType)<<" "<<cardNumber<<" "<<cardTypeIntToString(cardType)<<endl;
 				createRecordInFinancialData.close();
@@ -199,19 +196,31 @@ void dataEntryProcedure() {
 			case 3:{
 				system("cls");
 				ofstream createRecordInVirtualAccounts("Cuentas-Virtuales.txt", ios::app);
-				cout<<endl<<"------------------ Ingreso de informacion personal ------------------"<<endl;
-				cout<<"Codigo cuenta virtual: ";
-				cin>>financialCode;
+				cout<<endl<<"------------ Ingreso de informacion de cuentas virtuales ------------"<<endl;
 				do{
-					cout<<"Codigo Pesona: ";
+					cout<<"Codigo cuenta virtual: ";
+					cin>>virtualCodeAccount;
+					exist = verifyExistInVirtualAcounts(virtualCodeAccount);
+				} while (exist);
+				do{
+					cout<<"Codigo Persona: ";
 					cin>>codePerson;
 					exist = verifyExistInPersonal(codePerson);
-				} while (exist);
+				} while (exist == false);
+				do{
+					cout<<"Codigo financiero: ";
+					cin>>financialCode;
+					exist = verifyExistInFinancial(financialCode);
+				} while (exist == false);
 				cout<<"Usuario: ";
 				cin>>user;
 				cout<<"Contrasenia de usuario: ";
 				cin>>password;
-				createRecordInVirtualAccounts<<financialCode<<" "<<user<<" "<<password<<endl;
+				cout<<"VC "<<virtualCodeAccount;
+				cout<<"CP "<<codePerson;
+				cout<<"FC "<<financialCode;
+				system("Pause");
+				createRecordInVirtualAccounts<<virtualCodeAccount<<" "<<codePerson<<" "<<financialCode<<" "<<user<<" "<<password<<endl;
 				createRecordInVirtualAccounts.close();
 			}
 			break;
@@ -224,6 +233,10 @@ void dataEntryProcedure() {
 				break;
 		}
 	} while (optionMenu != 4);
+}
+
+void dataDisplayProcedure(){
+	
 }
 
 main() {
@@ -243,14 +256,14 @@ main() {
 				dataEntryProcedure();
 				break;
 			case 2:
-				//dataDisplayProcedure();
+				dataDisplayProcedure();
 				break;
 			case 3:
 				//dataModifyProcedure();
 				break;
 			case 4:
 				cout<<endl<<"Gracias por utilizar nuestro servicio de informacion."<<endl;
-                cout<<"Estudiantes: \n\tJulio Estuardo Teleguario Canu --- 1990 - 20 - 4006\n\tEdson Oseas Nimajuan Soloman ----- 1990 - 20 - 4003";
+                cout<<"Estudiantes: \n\tJulio Estuardo Teleguario Canu --- 1990 - 20 - 4006\n\tEdson Oseas Nimajuan Soloman ----- 1990 - 20 - 4003\n\tEliu Rosales Santos ------------- 1990 - 20 - 11745";
 				break;
 			default:
 				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;

@@ -1,2 +1,8 @@
-1 1 gyt a Ahorro 4567 Credito
-202 2 bac a Monetaria 9874 Credito
+5 2 bac 5 Ahorro 9876-4532 Debito
+20 3 gyt 5 Monetaria 5647-3219 Credito
+1 2 3 5 Ahorro 4 Credito
+9 3 pro 5 Monetaria 4 Debito
+2 3 4 5 Ahorro 5 Credito
+99 3 99 5 Ahorro 99 Credito
+100 1 100 gt-12345 Monetaria 100 Credito
+101 3 101 gt-123456 Ahorro 101 Debito
