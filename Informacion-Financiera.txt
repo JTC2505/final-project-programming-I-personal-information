@@ -1,5 +1,5 @@
 5 2 bac 5 Ahorro 9876-4532 Debito
-20 3 gyt 5 Monetaria 5647-3219 Credito
+20 3 gyt gt-123457 Ahorro 5647-3219 Credito
 1 2 3 5 Ahorro 4 Credito
 9 3 pro 5 Monetaria 4 Debito
 2 3 4 5 Ahorro 5 Credito

@@ -820,6 +820,268 @@ void dataDisplayProcedure(){
 	} while (optionMenu != 4);
 }
 
+void dataModifyProcedureFromPersonalData(){
+	int codeSelected, otherOption, newValueInt, TMPInt = 0;
+	string newValueString;
+	ifstream searchData("Informacion-Personal.txt");
+	ofstream saveTemporaly("temporal.txt");
+	system("cls");
+	cout<<"------ Modificar informacion -------"<<endl;
+    cout<<"----------------------------------"<<endl;
+	cout<<"Ingrese codigo de registro a modificar: "<<endl;
+	cin>>codeSelected;
+	while (searchData != NULL){
+		searchData>>codePerson>>username>>userLastname>>userAddress>>userEmail>>passwordEmail>>userPhone;
+		if (codePerson == codeSelected && codePerson != TMPInt) {
+			do{
+				cout<<"Coincidencia de busqueda con el codigo: "<<codePerson<<endl;
+				cout<<"1. Nombre: "<<username<<endl;
+				cout<<"2. Apellido: "<<userLastname<<endl;
+				cout<<"3. Direccion: "<<userAddress<<endl;
+				cout<<"4. Correo electronico: "<<userEmail<<endl;
+				cout<<"5. Contrasena: "<<passwordEmail<<endl;
+				cout<<"6. Telefono: "<<userPhone<<endl;
+				cout<<"Que dato desea modificar? "<<endl;
+				cin>>otherOption;
+				switch (otherOption){
+					case 1:{
+						cout<<"Ingrese nuevo nombre: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<codePerson<<" "<<newValueString<<" "<<userLastname<<" "<<userAddress<<" "<<userEmail<<" "<<passwordEmail<<" "<<userPhone<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 2:{
+						cout<<"Ingrese nuevo apellido: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<codePerson<<" "<<username<<" "<<newValueString<<" "<<userAddress<<" "<<userEmail<<" "<<passwordEmail<<" "<<userPhone<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 3:{
+						cout<<"Ingrese nueva direccion: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<codePerson<<" "<<username<<" "<<userLastname<<" "<<newValueString<<" "<<userEmail<<" "<<passwordEmail<<" "<<userPhone<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 4:{
+						cout<<"Ingrese nuevo email: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<codePerson<<" "<<username<<" "<<userLastname<<" "<<userAddress<<" "<<newValueString<<" "<<passwordEmail<<" "<<userPhone<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 5:{
+						cout<<"Ingrese nueva contrasena: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<codePerson<<" "<<username<<" "<<userLastname<<" "<<userAddress<<" "<<userEmail<<" "<<newValueString<<" "<<userPhone<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 6:{
+						cout<<"Ingrese nuevo telefono: "<<endl;
+						cin>>newValueInt;
+						saveTemporaly<<codePerson<<" "<<username<<" "<<userLastname<<" "<<userAddress<<" "<<userEmail<<" "<<passwordEmail<<" "<<newValueInt<<endl;
+						otherOption = 7;
+					}
+					break;
+					case 7:
+						cout<<"Saliendo..."<<endl;
+						break;
+					default:
+						cout<<"option no disponible"<<endl;
+						break;
+				}
+			}while(otherOption != 7);
+		}else if(codePerson != TMPInt){
+			saveTemporaly<<codePerson<<" "<<username<<" "<<userLastname<<" "<<userAddress<<" "<<userEmail<<" "<<passwordEmail<<" "<<userPhone<<endl;
+		}
+		TMPInt = codePerson;
+	}
+	searchData.close();
+	saveTemporaly.close();
+	remove("Informacion-Personal.txt");
+	rename("temporal.txt", "Informacion-Personal.txt");
+}
+
+void dataModifyProcedureFromFinancialData(){
+	int codeSelected, accountType1, otherOption, newValueInt, TMPInt = 0;
+	string newValueString;
+	ifstream searchData("Informacion-Financiera.txt");
+	ofstream saveTemporaly("temporal.txt");
+	system("cls");
+	cout<<"------ Modificar informacion -------"<<endl;
+    cout<<"----------------------------------"<<endl;
+	cout<<"Ingrese codigo de registro a modificar: "<<endl;
+	cin>>codeSelected;
+	while (searchData != NULL){
+		searchData>>financialCode>>codePerson>>bankName>>accountNumber>>accountTypeStr>>cardNumber>>cardTypeStr;
+		if (financialCode == codeSelected && financialCode != TMPInt) {
+			do{
+				cout<<"Coincidencia de busqueda con el codigo: "<<financialCode<<endl;
+				cout<<"1. Nombre de banco: "<<bankName<<endl;
+				cout<<"2. Numero de cuenta: "<<accountNumber<<endl;
+				cout<<"3. Tipo de cuenta: "<<accountTypeStr<<endl;
+				cout<<"4. Numero de tarjeta: "<<cardNumber<<endl;
+				cout<<"5. Tipo de tarjeta: "<<cardTypeStr<<endl;
+				cout<<"Que dato desea modificar? "<<endl;
+				cin>>otherOption;
+				switch (otherOption){
+					case 1:{
+						cout<<"Ingrese nuevo nombre de banco: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<financialCode<<" "<<codePerson<<" "<<newValueString<<" "<<accountNumber<<" "<<accountTypeStr<<" "<<cardNumber<<" "<<cardTypeStr<<endl;
+						otherOption = 6;
+					}
+					break;
+					case 2:{
+						cout<<"Ingrese nuevo numero de cuenta: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<newValueString<<" "<<accountTypeStr<<" "<<cardNumber<<" "<<cardTypeStr<<endl;
+						otherOption = 6;
+					}
+					break;
+					case 3:{
+						do {
+							cout<<"Ingrese el numero correspondiente al tipo de cuenta: \n\t 1. Ahorro\n\t 2. Monetaria"<<endl;
+							cin>>accountType1;
+							if (accountType1 >= 3 || accountType1 <= 0) {
+								cout<<"No es un tipo valido de cuenta, ingrese otro. ";
+							}
+						} while (accountType1 >= 3 || accountType1 <= 0);
+						newValueString = accountTypeIntToString(accountType1);
+						saveTemporaly<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<accountNumber<<" "<<newValueString<<" "<<cardNumber<<" "<<cardTypeStr<<endl;
+						otherOption = 6;
+					}
+					break;
+					case 4:{
+						cout<<"Ingrese nuevo numero de tarjeta: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<accountNumber<<" "<<accountTypeStr<<" "<<newValueString<<" "<<cardTypeStr<<endl;
+						otherOption = 6;
+					}
+					break;
+					case 5:{
+						do {
+							cout<<"Ingrese el numero correspondiente al tipo de tarjeta: \n\t 1. Debito\n\t 2. Credito"<<endl;
+							cin>>accountType1;
+							if (accountType1 >= 3 || accountType1 <= 0) {
+								cout<<"No es un tipo valido de cuenta, ingrese otro. ";
+							}
+						} while (accountType1 >= 3 || accountType1 <= 0);
+						newValueString = cardTypeIntToString(accountType1);
+						saveTemporaly<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<accountNumber<<" "<<accountTypeStr<<" "<<cardNumber<<" "<<newValueString<<endl;
+						otherOption = 6;
+					}
+					break;
+					case 6:
+						cout<<"Saliendo..."<<endl;
+						break;
+					default:
+						cout<<"option no disponible"<<endl;
+						break;
+				}
+			}while(otherOption != 6);
+		}else if(financialCode != TMPInt){
+			saveTemporaly<<financialCode<<" "<<codePerson<<" "<<bankName<<" "<<accountNumber<<" "<<accountTypeStr<<" "<<cardNumber<<" "<<cardTypeStr<<endl;
+		}
+		TMPInt = financialCode;
+	}
+	searchData.close();
+	saveTemporaly.close();
+	remove("Informacion-Financiera.txt");
+	rename("temporal.txt", "Informacion-Financiera.txt");
+}
+
+void dataModifyProcedureFromVirtualAccounts(){
+	int codeSelected, otherOption, TMPInt = 0;
+	string newValueString;
+	ifstream searchData("Cuentas-Virtuales.txt");
+	ofstream saveTemporaly("temporal.txt");
+	system("cls");
+	cout<<"------ Modificar informacion -------"<<endl;
+    cout<<"----------------------------------"<<endl;
+	cout<<"Ingrese codigo de registro a modificar: "<<endl;
+	cin>>codeSelected;
+	while (searchData != NULL){
+		searchData>>virtualCodeAccount>>codePerson>>financialCode>>user>>password;
+		if (virtualCodeAccount == codeSelected && financialCode != TMPInt) {
+			do{
+				cout<<"Coincidencia de busqueda con el codigo: "<<financialCode<<endl;
+				cout<<"1. Usuario: "<<user<<endl;
+				cout<<"2. Contrasena: "<<password<<endl;
+				cout<<"Que dato desea modificar? "<<endl;
+				cin>>otherOption;
+				switch (otherOption){
+					case 1:{
+						cout<<"Ingrese nuevo nombre de banco: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<virtualCodeAccount<<" "<<codePerson<<" "<<financialCode<<" "<<newValueString<<" "<<password<<endl;
+						otherOption = 3;
+					}
+					break;
+					case 2:{
+						cout<<"Ingrese nuevo numero de cuenta: "<<endl;
+						cin>>newValueString;
+						saveTemporaly<<virtualCodeAccount<<" "<<codePerson<<" "<<financialCode<<" "<<user<<" "<<newValueString<<endl;
+						otherOption = 3;
+					}
+					break;
+					case 3:
+						cout<<"Saliendo..."<<endl;
+						break;
+					default:
+						cout<<"option no disponible"<<endl;
+						break;
+				}
+			}while(otherOption != 3);
+		}else if(virtualCodeAccount != TMPInt){
+			saveTemporaly<<virtualCodeAccount<<" "<<codePerson<<" "<<financialCode<<" "<<user<<" "<<password<<endl;
+		}
+		TMPInt = virtualCodeAccount;
+	}
+	searchData.close();
+	saveTemporaly.close();
+	remove("Cuentas-Virtuales.txt");
+	rename("temporal.txt", "Cuentas-Virtuales.txt");
+}
+
+void dataModifyProcedure(){
+	do{
+		system("cls");
+		cout<<"------ Modificar informacion -------"<<endl;
+        cout<<"----------------------------------"<<endl;
+		cout<<"1. Datos personales"<<endl;
+		cout<<"2. Datos financieros"<<endl;
+		cout<<"3. Datos de cuentas virtuales"<<endl;
+		cout<<"4. Salir"<<endl;
+        cout<<"--------------------------------"<<endl;
+		cin>>optionMenu;
+		switch (optionMenu) {
+			case 1:{
+				dataModifyProcedureFromPersonalData();
+			}
+			break;
+			case 2:{
+				dataModifyProcedureFromFinancialData();
+			}
+			break;
+			case 3:{
+				dataModifyProcedureFromVirtualAccounts();
+			}
+			break;
+			case 4:
+				cout<<endl<<"Volviendo... ";
+				break;
+			default:
+				cout<<endl<<"Opcion no valida, por favor ingrese otra"<<endl;
+				system("pause");
+				break;
+		}
+	} while (optionMenu != 4);
+}
+
 main() {
 	do {
 		system("cls");
@@ -840,7 +1102,7 @@ main() {
 				dataDisplayProcedure();
 				break;
 			case 3:
-				//dataModifyProcedure();
+				dataModifyProcedure();
 				break;
 			case 4:
 				cout<<endl<<"Gracias por utilizar nuestro servicio de informacion."<<endl;
